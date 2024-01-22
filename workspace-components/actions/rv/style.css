@@ -1,0 +1,36 @@
+.lalalab-component {
+    max-width: 300px;
+}
+.tab {
+    cursor: pointer;
+}
+.tab__label {
+    cursor: pointer;
+}
+.tab input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+.tab__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.35s;
+}
+.tab input:checked ~ .tab__content {
+    max-height: 10rem;
+}
+.dropdowns-and-action {
+    display: flex;
+    align-items: center;
+}
+.right-splitter {
+    flex-grow: 1;
+    margin: 0 15px;
+}
+.rv-button {
+    width: 100%;
+}
+.space-bottom {
+    margin-bottom: 5px;
+}

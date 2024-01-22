@@ -1,0 +1,72 @@
+{{log this.selectedProduct}}
+<div class="lalalab-component">
+    <div>
+        <BetaSelect
+          @placeholder="Select one reason"
+          @value={{one-way this.reasonForRV}}
+          @onChange={{fn (mut this.reasonForRV)}}
+          @options={{this.selectedProduct.forest-reasons}}
+          @namePath="name"
+          @valuePath="value"
+          @class="space-bottom"
+        />
+    </div>
+    <div class="dropdowns-and-action">
+        <div class="left-splitter">
+            <BetaSelect
+              @placeholder="Force move (optional)"
+              @value={{one-way this.forceMove}}
+              @onChange={{fn (mut this.forceMove)}}
+              @options={{this.selectedProduct.forest-forceMoveOptions}}
+              @namePath="name"
+              @valuePath="value"
+              @class="space-bottom"
+            />
+            <BetaSelect
+              @placeholder="Force carrier (optional)"
+              @value={{this.forceCarrier}}
+              @onChange={{fn (mut this.forceCarrier)}}
+              @options={{this.selectedProduct.forest-forceCarrierOptions}}
+              @namePath="name"
+              @valuePath="value"
+              @class="space-bottom"
+            />
+        </div>
+        <div class="right-splitter">
+            <Button::BetaButton
+              @class="rv-button"
+              @type="primary"
+              @text="RV"
+              @action={{this.triggerAction}}
+              @withoutCallback={{true}}
+            />
+        </div>
+    </div>
+    {{#each this.selectedProduct.forest-extraInfo.items as |item index|}}
+        <div style="display: flex;justify-content: space-between;max-width: 400px;">
+            <BetaLabel
+              @label={{item.label}}
+            >
+                <Form::BetaCheckbox
+                    @onChange={{fn (mut item.check)}}
+                    @value={{one-way item.check}}
+                />
+            </BetaLabel>
+            <BetaInput
+                @placeholder="Quantity"
+                @onChange={{fn (mut item.quantity)}}
+                @value={{one-way item.quantity}}
+                @type="number"
+            />
+        </div>
+        <div class="tab">
+            <input type="checkbox" name="accordion-{{index}}" id="cb-{{index}}">
+            <label for="cb-{{index}}" class="tab__label">Show Thumbs</label>
+            <div class="tab__content">
+                {{#each item.thumbs as |thumb|}}
+                    <img src={{thumb}} width="150"/>
+                {{/each}}
+            </div>
+        </div>
+    {{/each}}
+</div>
